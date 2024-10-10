@@ -1,44 +1,38 @@
-package org.example.ej7
+package org.example.ej8
 
+import org.example.Console
+import org.example.ej7.Personaje
 import kotlin.random.Random
 
 
-class Personaje(val nombre: String, var vida: Int, val ataque: Int = Random.nextInt(1,10)) {
+class PersonajeConInventario(val nombre: String) {
 
 
-    private var vivo = true
+    private val _inventario: MutableList<Objetos> = mutableListOf()
 
-    init {
-        if (!(1..100).contains(vida)) {
-            vida = 100
-        }
+    fun addToInventory(objeto: Objetos) {
+        _inventario.add(objeto)
+        Console.writeText("${objeto.nombre} ha sido añadido al inventario.")
     }
 
+    fun removeFromInventory(objeto: Objetos) {
 
-    fun ataque(): Int{
-        return ataque
-    }
-
-
-    fun recivirDmg(dmg: Int){
-        if (dmg >= vida){
-            vida = 0
-            vivo = false
+        if (_inventario.contains(objeto)) {
+            _inventario.remove(objeto)
+            Console.writeText("${objeto.nombre} ha sido eliminado del inventario.")
         }
         else{
-            if (vida - dmg < 0 ){
-                vida = 0
-                vivo = false
-            }
-            else{
-                vida -= dmg
-            }
+            Console.writeText("Ese objeto no se encuentra en el inventario.")
         }
+
     }
 
+    fun showInventory(){
 
-    fun getVivo(): Boolean{
-        return vivo
+        Console.writeText("-- INVENTARIO DE ${nombre.uppercase()} --\n")
+        _inventario.forEach {
+            Console.writeText(it.toString())
+        }
     }
 
 }

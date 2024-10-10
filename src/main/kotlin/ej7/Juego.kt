@@ -1,4 +1,4 @@
-package org.example
+package org.example.ej7
 
 class Juego {
 
@@ -14,12 +14,12 @@ class Juego {
 
             dmg = orden[0].ataque()
             orden[1].recivirDmg(dmg)
-            println("${orden[1].nombre} ha recivido $dmg puntos de daño")
+            println("${orden[1].nombre} ha recivido $dmg puntos de daño (hp: ${orden[1].vida})")
 
             if (orden[1].getVivo()){
                 dmg = orden[1].ataque()
                 orden[0].recivirDmg(dmg)
-                println("${orden[0].nombre} ha recivido $dmg puntos de daño")
+                println("${orden[0].nombre} ha recivido $dmg puntos de daño (hp: ${orden[0].vida})")
                 ronda ++
             }
 
